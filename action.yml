@@ -1,0 +1,39 @@
+name: 'Delete package versions'
+description: 'A Github action that delete selected package versions'
+branding:
+  icon: trash
+  color: green
+inputs:
+  github-repository:
+    description: 'Repository name in format <OWNER>/<REPO>'
+    required: false
+    default: ${{ github.repository }}
+  token:
+    description: "GitHub token"
+    required: false
+    default: ${{ secrets.GITHUB_TOKEN }}
+  type:
+    description: 'Package type'
+    required: true
+    options: 
+    - npm
+    - maven
+    - rubygems
+    - docker
+    - nuget
+    - container
+  version:
+    description: 'Version name'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - '--github-repository'
+  - ${{ inputs.github-repository }}
+  - '--token'
+  - ${{ inputs.token }}
+  - '--type'
+  - ${{ inputs.type }}
+  - '--version'
+  - ${{ inputs.version }}
