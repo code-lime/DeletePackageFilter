@@ -10,8 +10,7 @@ inputs:
     default: ${{ github.repository }}
   token:
     description: "GitHub token"
-    required: false
-    default: ${{ secrets.GITHUB_TOKEN }}
+    required: true
   type:
     description: 'Package type'
     required: true
